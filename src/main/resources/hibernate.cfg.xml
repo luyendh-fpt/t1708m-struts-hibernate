@@ -12,5 +12,8 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="com.t1708m.entity.Student"/>
+        <mapping class="com.t1708m.entity.Account"/>
+        <mapping class="com.t1708m.entity.Credential"/>
+        <mapping class="com.t1708m.entity.Role"/>
     </session-factory>
 </hibernate-configuration>

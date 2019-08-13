@@ -1,7 +1,6 @@
 package com.t1708m.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
@@ -11,69 +10,90 @@ public class Student {
     private String rollNumber;
     private String name;
     private String email;
-    private long createdAt;
-    private long updatedAt;
+    private long createdAtMLS;
+    private long updatedAtMLS;
+    private long deletedAtMLS;
     private int status;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Account account;
 
     public String getRollNumber() {
         return rollNumber;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public long getCreatedAt() {
-        return createdAt;
-    }
-
-    public long getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public int getStatus() {
-        return status;
     }
 
     public void setRollNumber(String rollNumber) {
         this.rollNumber = rollNumber;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setCreatedAt(long createdAt) {
-        this.createdAt = createdAt;
+    public long getCreatedAtMLS() {
+        return createdAtMLS;
     }
 
-    public void setUpdatedAt(long updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setCreatedAtMLS(long createdAtMLS) {
+        this.createdAtMLS = createdAtMLS;
+    }
+
+    public long getUpdatedAtMLS() {
+        return updatedAtMLS;
+    }
+
+    public void setUpdatedAtMLS(long updatedAtMLS) {
+        this.updatedAtMLS = updatedAtMLS;
+    }
+
+    public long getDeletedAtMLS() {
+        return deletedAtMLS;
+    }
+
+    public void setDeletedAtMLS(long deletedAtMLS) {
+        this.deletedAtMLS = deletedAtMLS;
+    }
+
+    public int getStatus() {
+        return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     public static final class Builder {
         private String rollNumber;
         private String name;
         private String email;
-        private long createdAt;
-        private long updatedAt;
+        private long createdAtMLS;
+        private long updatedAtMLS;
+        private long deletedAtMLS;
         private int status;
 
         private Builder() {
-            this.createdAt = Calendar.getInstance().getTimeInMillis();
-            this.updatedAt = Calendar.getInstance().getTimeInMillis();
+            this.createdAtMLS = Calendar.getInstance().getTimeInMillis();
+            this.updatedAtMLS = Calendar.getInstance().getTimeInMillis();
         }
 
         public static Builder aStudent() {
@@ -95,13 +115,18 @@ public class Student {
             return this;
         }
 
-        public Builder withCreatedAt(long createdAt) {
-            this.createdAt = createdAt;
+        public Builder withCreatedAtMLS(long createdAtMLS) {
+            this.createdAtMLS = createdAtMLS;
             return this;
         }
 
-        public Builder withUpdatedAt(long updatedAt) {
-            this.updatedAt = updatedAt;
+        public Builder withUpdatedAtMLS(long updatedAtMLS) {
+            this.updatedAtMLS = updatedAtMLS;
+            return this;
+        }
+
+        public Builder withDeletedAtMLS(long deletedAtMLS) {
+            this.deletedAtMLS = deletedAtMLS;
             return this;
         }
 
@@ -112,12 +137,13 @@ public class Student {
 
         public Student build() {
             Student student = new Student();
-            student.rollNumber = this.rollNumber;
-            student.createdAt = this.createdAt;
-            student.name = this.name;
-            student.email = this.email;
-            student.updatedAt = this.updatedAt;
-            student.status = this.status;
+            student.setRollNumber(rollNumber);
+            student.setName(name);
+            student.setEmail(email);
+            student.setCreatedAtMLS(createdAtMLS);
+            student.setUpdatedAtMLS(updatedAtMLS);
+            student.setDeletedAtMLS(deletedAtMLS);
+            student.setStatus(status);
             return student;
         }
     }
